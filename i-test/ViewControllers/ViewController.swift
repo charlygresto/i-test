@@ -20,7 +20,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        self.navigationController?.navigationBar.isHidden = true
         navigationController?.setNavigationBarHidden(true, animated: animated)
         
         lblDisclaimer.numberOfLines = 3
@@ -76,8 +75,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         let symbol:String = c["symbol"] as! String
                         let rate:String = c["rate"] as! String
                         let desc:String = c["description"] as! String
+                        let rateFloat = c["rate_float"] as! Double
                         
-                        let mCurrency:Currency = Currency(code: code, symbol: symbol, rate: rate, desc: desc)
+                        let mCurrency:Currency = Currency(code: code, symbol: symbol, rate: rate, desc: desc, rate_float: rateFloat)
                         temCurrenciesArr.append(mCurrency)
                     }
                     
@@ -102,9 +102,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let mCurrency:Currency = self.currencies[indexPath.row]
         
         cell.currencyDesc.text = mCurrency.desc
-        cell.rate.text = mCurrency.rate
+        cell.rate.text = mCurrency.rate_float.formatAsCurrency(currencyCode: mCurrency.code)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let selectedBPI = currencies[indexPath.row]
+        
+        let sVC:SingleBPIViewController = storyboard?.instantiateViewController(identifier: "SingleBPIViewController") as! SingleBPIViewController
+        
+        sVC.currency = selectedBPI
+        self.navigationController?.pushViewController(sVC, animated: true)
+        
     }
     
 }

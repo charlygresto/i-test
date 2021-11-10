@@ -15,7 +15,8 @@ extension Double {
         currencyFormatter.numberStyle = .currency
         currencyFormatter.currencyCode = currencyCode
         currencyFormatter.maximumFractionDigits = floor(self) == self ? 0 : 2
-//        return currencyFormatter.stringFromNumber(NSNumber(self))
-        return "tet"
+        
+        return currencyFormatter.string(from: self as NSNumber)
+        
     }
 }
