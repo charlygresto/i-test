@@ -12,7 +12,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     @IBOutlet weak var lblTimeUpdate: UILabel!
-//    @IBOutlet weak var lblDisclaimer: UILabel!
     @IBOutlet weak var closeAd: UIButton!
     
     @IBOutlet weak var pricesTableView: UITableView!
@@ -27,9 +26,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         navigationController?.setNavigationBarHidden(true, animated: animated)
         
-//        lblDisclaimer.numberOfLines = 3
-//        lblDisclaimer.lineBreakMode = .byWordWrapping
-        
         fetchData { currensys in
             self.currencies = currensys
             
@@ -37,6 +33,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.pricesTableView.reloadData()
             }
         }
+        
+        if selectBy(serviceName: "GAD"){
+            self.gadView.isHidden = true
+        } else{
+            self.gadView.isHidden = false
+        }
+        
+        deleteBy(serviceName: "GAD")
         
     }
     
@@ -125,6 +129,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         tableView.deselectRow(at: indexPath, animated: true)
         let selectedBPI = currencies[indexPath.row]
         
@@ -139,9 +144,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBAction func closeAds(_ sender: Any) {
         
         let cancelAdAlert = UIAlertController(title: "Remove Ads?", message: "", preferredStyle: .alert)
-//        cancelAdAlert.title = "Remove Ads?"
-//        cancelAdAlert.message = "All data will be lost."
         cancelAdAlert.addAction(UIAlertAction(title: "Pay", style: .default, handler: { _ in
+            
+            insertIntoDB(serviceName: "GAD", paid: true)
+            self.gadView.isHidden = true
             
         }))
         cancelAdAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
@@ -155,6 +161,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
         self.gadView.bringSubviewToFront(self.closeAd)
+    }
+    
+    func hideBanner(name:String) {
+        if name == "GAD" {
+            
+        }
     }
     
 }

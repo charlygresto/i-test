@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,6 +18,7 @@
 		6A27FA9D273BD419009BEEAE /* CurrencyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A27FA9C273BD419009BEEAE /* CurrencyTableViewCell.swift */; };
 		6A27FAA1273BD465009BEEAE /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A27FAA0273BD465009BEEAE /* Currency.swift */; };
 		6A27FAA3273C0025009BEEAE /* SingleBPIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A27FAA2273C0025009BEEAE /* SingleBPIViewController.swift */; };
+		6A27FAA6273D2D4D009BEEAE /* UserDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A27FAA5273D2D4D009BEEAE /* UserDB.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		6A27FA9C273BD419009BEEAE /* CurrencyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTableViewCell.swift; sourceTree = "<group>"; };
 		6A27FAA0273BD465009BEEAE /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		6A27FAA2273C0025009BEEAE /* SingleBPIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBPIViewController.swift; sourceTree = "<group>"; };
+		6A27FAA5273D2D4D009BEEAE /* UserDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDB.swift; sourceTree = "<group>"; };
 		B5B87AE53C508FB00B14BC29 /* Pods-i-test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-i-test.debug.xcconfig"; path = "Target Support Files/Pods-i-test/Pods-i-test.debug.xcconfig"; sourceTree = "<group>"; };
 		C4E91D49B014D1A5822FA84B /* Pods-i-test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-i-test.release.xcconfig"; path = "Target Support Files/Pods-i-test/Pods-i-test.release.xcconfig"; sourceTree = "<group>"; };
 		F8C2B8C773E3FFB34DF19873 /* Pods_i_test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_i_test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,7 +66,6 @@
 				B5B87AE53C508FB00B14BC29 /* Pods-i-test.debug.xcconfig */,
 				C4E91D49B014D1A5822FA84B /* Pods-i-test.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -99,6 +100,7 @@
 				6A27FA8F273BB188009BEEAE /* LaunchScreen.storyboard */,
 				6A27FA92273BB188009BEEAE /* Info.plist */,
 				6A27FA98273BCB7A009BEEAE /* Extensions.swift */,
+				6A27FAA5273D2D4D009BEEAE /* UserDB.swift */,
 			);
 			path = "i-test";
 			sourceTree = "<group>";
@@ -246,6 +248,7 @@
 				6A27FA89273BB185009BEEAE /* ViewController.swift in Sources */,
 				6A27FA85273BB185009BEEAE /* AppDelegate.swift in Sources */,
 				6A27FAA3273C0025009BEEAE /* SingleBPIViewController.swift in Sources */,
+				6A27FAA6273D2D4D009BEEAE /* UserDB.swift in Sources */,
 				6A27FA87273BB185009BEEAE /* SceneDelegate.swift in Sources */,
 				6A27FA9D273BD419009BEEAE /* CurrencyTableViewCell.swift in Sources */,
 				6A27FA99273BCB7A009BEEAE /* Extensions.swift in Sources */,
