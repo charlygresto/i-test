@@ -6,14 +6,19 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, GADBannerViewDelegate {
     
     
     @IBOutlet weak var lblTimeUpdate: UILabel!
-    @IBOutlet weak var lblDisclaimer: UILabel!
+//    @IBOutlet weak var lblDisclaimer: UILabel!
+    @IBOutlet weak var closeAd: UIButton!
     
     @IBOutlet weak var pricesTableView: UITableView!
+    
+    @IBOutlet weak var gadView: GADBannerView!
+    
     
     var currencies:[Currency] = [Currency]()
     
@@ -22,8 +27,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         navigationController?.setNavigationBarHidden(true, animated: animated)
         
-        lblDisclaimer.numberOfLines = 3
-        lblDisclaimer.lineBreakMode = .byWordWrapping
+//        lblDisclaimer.numberOfLines = 3
+//        lblDisclaimer.lineBreakMode = .byWordWrapping
         
         fetchData { currensys in
             self.currencies = currensys
@@ -38,6 +43,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+//        gadView.adUnitID = "ca-app-pub-4807549148849980/5977710321"
+        gadView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        gadView.rootViewController = self
+        gadView.load(GADRequest())
+        
+        gadView.delegate = self
+        
     }
     
     func fetchData( handler: @escaping ([Currency])->()) {
@@ -58,11 +75,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     let time = json["time"] as! [String:String]
                     let updatedTime = time["updated"]
 
-                    let disclaimer = json["disclaimer"] as! String
+//                    let disclaimer = json["disclaimer"] as! String
 
                     
                     DispatchQueue.main.async {
-                        self.lblDisclaimer.text = disclaimer
+//                        self.lblDisclaimer.text = disclaimer
                         self.lblTimeUpdate.text = updatedTime
                     }
                     
@@ -116,6 +133,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         sVC.currency = selectedBPI
         self.navigationController?.pushViewController(sVC, animated: true)
         
+    }
+    
+    
+    @IBAction func closeAds(_ sender: Any) {
+        
+        let cancelAdAlert = UIAlertController(title: "Remove Ads?", message: "", preferredStyle: .alert)
+//        cancelAdAlert.title = "Remove Ads?"
+//        cancelAdAlert.message = "All data will be lost."
+        cancelAdAlert.addAction(UIAlertAction(title: "Pay", style: .default, handler: { _ in
+            
+        }))
+        cancelAdAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+            
+        }))
+        
+        self.present(cancelAdAlert, animated: true, completion: nil)
+        
+    }
+    
+    
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        self.gadView.bringSubviewToFront(self.closeAd)
     }
     
 }
