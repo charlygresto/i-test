@@ -6,17 +6,14 @@
 //
 
 import UIKit
-import GoogleMobileAds
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, GADBannerViewDelegate {
+class ViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     
     @IBOutlet weak var lblTimeUpdate: UILabel!
-    @IBOutlet weak var closeAd: UIButton!
     
     @IBOutlet weak var pricesTableView: UITableView!
-    
-    @IBOutlet weak var gadView: GADBannerView!
+    @IBOutlet weak var BPITableView: UITableView!
     
     
     var currencies:[Currency] = [Currency]()
@@ -34,31 +31,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
         
-        if selectBy(serviceName: "GAD"){
-            self.gadView.isHidden = true
+        BPITableView.translatesAutoresizingMaskIntoConstraints = false
+
+        BPITableView.topAnchor.constraint(equalTo: self.lblTimeUpdate.bottomAnchor, constant: 20).isActive = true
+        BPITableView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        
+        if adsView != nil{
+            BPITableView.bottomAnchor.constraint(equalTo: adsView.topAnchor, constant: 20).isActive = true
         } else{
-            self.gadView.isHidden = false
+            BPITableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         }
         
-        deleteBy(serviceName: "GAD")
+        
         
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-//        gadView.adUnitID = "ca-app-pub-4807549148849980/5977710321"
-        gadView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-        gadView.rootViewController = self
-        gadView.load(GADRequest())
-        
-        gadView.delegate = self
-        
     }
     
     func fetchData( handler: @escaping ([Currency])->()) {
@@ -79,11 +69,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     let time = json["time"] as! [String:String]
                     let updatedTime = time["updated"]
 
-//                    let disclaimer = json["disclaimer"] as! String
-
-                    
                     DispatchQueue.main.async {
-//                        self.lblDisclaimer.text = disclaimer
                         self.lblTimeUpdate.text = updatedTime
                     }
                     
@@ -139,35 +125,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.navigationController?.pushViewController(sVC, animated: true)
         
     }
-    
-    
-    @IBAction func closeAds(_ sender: Any) {
-        
-        let cancelAdAlert = UIAlertController(title: "Remove Ads?", message: "", preferredStyle: .alert)
-        cancelAdAlert.addAction(UIAlertAction(title: "Pay", style: .default, handler: { _ in
-            
-            insertIntoDB(serviceName: "GAD", paid: true)
-            self.gadView.isHidden = true
-            
-        }))
-        cancelAdAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
-            
-        }))
-        
-        self.present(cancelAdAlert, animated: true, completion: nil)
-        
-    }
-    
-    
-    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
-        self.gadView.bringSubviewToFront(self.closeAd)
-    }
-    
-    func hideBanner(name:String) {
-        if name == "GAD" {
-            
-        }
-    }
+
     
 }
 

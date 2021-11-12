@@ -21,7 +21,7 @@ func createTable()  {
         print("error opening database")
     }
     
-    let createTableQuery = "CREATE TABLE IF NOT EXISTS USERDATA(id INTEGER PRIMARY KEY AUTOINCREMENT, adsService TEXT, paid INT)"
+    let createTableQuery = "CREATE TABLE IF NOT EXISTS USERDATA(id INTEGER PRIMARY KEY AUTOINCREMENT, adsService TEXT, paid INT, UNIQUE(adsService, paid));"
     
     if sqlite3_exec(db, createTableQuery, nil, nil, nil) != SQLITE_OK{
         print("error creating table!")
@@ -51,7 +51,7 @@ func insertIntoDB(serviceName:String, paid:Bool){
     
     let paiid:Int = (paid ? 1 : 0)
     
-    let insertQuery = "INSERT INTO USERDATA(adsService, paid) VALUES (?,?);"
+    let insertQuery = "INSERT OR IGNORE INTO USERDATA(adsService, paid) VALUES (?,?);"
     
     if sqlite3_prepare_v2(db, insertQuery, -1, &stmt, nil) == SQLITE_OK{
         

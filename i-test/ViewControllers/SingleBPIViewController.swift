@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SingleBPIViewController: UIViewController {
+class SingleBPIViewController: BaseViewController {
     
     
     @IBOutlet weak var lblCurrencyDesc: UILabel!
