@@ -11,9 +11,7 @@ class ViewController: BaseViewController, UITableViewDelegate, UITableViewDataSo
     
     
     @IBOutlet weak var lblTimeUpdate: UILabel!
-    
     @IBOutlet weak var pricesTableView: UITableView!
-    @IBOutlet weak var BPITableView: UITableView!
     
     
     var currencies:[Currency] = [Currency]()
@@ -31,25 +29,26 @@ class ViewController: BaseViewController, UITableViewDelegate, UITableViewDataSo
             }
         }
         
-        BPITableView.translatesAutoresizingMaskIntoConstraints = false
+        pricesTableView.translatesAutoresizingMaskIntoConstraints = false
 
-        BPITableView.topAnchor.constraint(equalTo: self.lblTimeUpdate.bottomAnchor, constant: 20).isActive = true
-        BPITableView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        pricesTableView.topAnchor.constraint(equalTo: self.lblTimeUpdate.bottomAnchor, constant: 20).isActive = true
+        pricesTableView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         
         if adsView != nil{
-            BPITableView.bottomAnchor.constraint(equalTo: adsView.topAnchor, constant: 20).isActive = true
+            pricesTableView.bottomAnchor.constraint(equalTo: adsView.topAnchor, constant: 20).isActive = true
         } else{
-            BPITableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+            pricesTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         }
         
-        
-        
     }
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
+    
+    
     
     func fetchData( handler: @escaping ([Currency])->()) {
         

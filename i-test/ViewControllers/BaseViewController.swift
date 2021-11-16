@@ -20,7 +20,6 @@ class BaseViewController: UIViewController, GADBannerViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
         if !adsViewAdded{
             checkIfPaid()
         }
@@ -100,8 +99,8 @@ class BaseViewController: UIViewController, GADBannerViewDelegate {
             self.bannerView.removeFromSuperview()
             self.closeButton.removeFromSuperview()
             
-            self.adsViewAdded = false
             self.adsView.removeFromSuperview()
+            self.adsViewAdded = false
             self.checkIfPaid()
             
         }))
